@@ -8,7 +8,7 @@ import copy
 # Account for scores with different parts
 # Create a new score that is populated with merged parts and measures
 #
-#
+#j
 
 env = environment.Environment()
 env['musicxmlPath'] = r'C:\Program Files\MuseScore 4\bin\MuseScore4.exe'  # Update path
