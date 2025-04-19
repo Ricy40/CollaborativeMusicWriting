@@ -1,0 +1,3 @@
+[console_scripts]
+musicmerge = musicmerge.cli:main
+musicmerge-gui = musicmerge.gui.app:run_gui

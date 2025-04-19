@@ -1,4 +1,4 @@
-from music21 import note, stream, chord, expressions
+from music21 import converter, stream, note, chord, expressions
 import copy
 
 def compare_scores(score1, score2):
@@ -75,54 +75,6 @@ def compare_scores(score1, score2):
 
     return differences
 
-def merge_scores(score1, score2):
-    merged_score = copy.deepcopy(score1)
-
-    for part1, part2 in zip(merged_score.parts, score2.parts):
-        for measure1, measure2 in zip(part1.getElementsByClass('Measure'), part2.getElementsByClass('Measure')):
-            for n1, n2 in zip(measure1.notes, measure2.notes):
-                if n1.nameWithOctave != n2.nameWithOctave or n1.duration.quarterLength != n2.duration.quarterLength:
-                    n1.pitch = n2.pitch
-                    n1.duration = n2.duration
-
-    return merged_score
-
-
-def add_highlighted_note(note_x):
-    highlighted_note = copy.deepcopy(note_x)
-    highlighted_note.expressions.append(expressions.TextExpression("color:red"))
-    highlighted_note.style.color = 'red'
-    return copy.deepcopy(highlighted_note)
-
-def compare_measures(measure1, measure2):
-    merged_measure = stream.Measure(number=measure1.number)
-
-    # Ensure both measures have the same number of notes
-    notes1 = list(measure1.notes)
-    notes2 = list(measure2.notes)
-    max_length = len(notes2)
-
-    for i in range(max_length):
-
-        try:
-            note1, note2 = notes1[i], notes2[i]
-
-            # Check for differences in pitch or duration
-            if note1.pitch != note2.pitch or note1.duration.quarterLength != note2.duration.quarterLength:
-                # Clone note1 and highlight it
-                merged_measure.append(add_highlighted_note(note2))
-            else:
-                merged_measure.append(copy.deepcopy(note2))
-
-        # Catch if there are fewer notes in measure1 than measure2
-        except IndexError:
-            merged_measure.append(add_highlighted_note(notes2[i]))
-
-
-
-    return merged_measure
-
-
 def show_differences(measure1, measure2):
     """
     Show a measure with differing notes/chords highlighted in red.
@@ -167,11 +119,72 @@ def update_measure(target_score, part_name, measure_number, new_measure):
                     break
             break
 
+def interactive_merge(score1, score2):
+    """
+    Interactively merge two scores, letting the user choose which measures to keep.
+    Returns:
+        The merged score (initially a copy of score1, updated with user choices).
+    """
 
-def show_diff_old(merged_measure):
+    # Step 1: Detect differences
+    differences = compare_scores(score1, score2)
+    if not differences:
+        print("No differences found. Scores are identical.")
+        return copy.deepcopy(score1)
+
+    # Step 2: Initialize new_score as a copy of score1
+    new_score = copy.deepcopy(score1)
+    print("New score created as a copy of score1.")
+
+    # Step 3: Iterate through parts with differences
+    for part_diff in differences:
+        part_name = part_diff['part_name']
+        print(f"\nChecking part: {part_name}")
+
+        # Step 4: Iterate through differing measures in this part
+        for measure_diff in part_diff['differences']:
+            measure_number = measure_diff['measure_number']
+            print(f"\nMeasure {measure_number}: Differences detected.")
+
+            while True:
+                # Prompt user for action
+                user_input = input(
+                    "Options:\n"
+                    "  s1 - Show measure from score1\n"
+                    "  s2 - Show measure from score2\n"
+                    "  n  - Show differences (highlighted in red)\n"
+                    "  c1 - Keep measure from score1\n"
+                    "  c2 - Keep measure from score2\n"
+                    "  q  - Quit merging\n"
+                    "Choose an option: "
+                ).strip().lower()
+
+                # Handle user input
+                if user_input == 's1':
+                    measure_diff['score1_measure'].show('musicxml')
+                elif user_input == 's2':
+                    measure_diff['score2_measure'].show('musicxml')
+                elif user_input == 'n':
+                    show_differences(measure_diff['score1_measure'], measure_diff['score2_measure'])
+                elif user_input == 'c1':
+                    print(f"Keeping measure {measure_number} from score1.")
+                    break
+                elif user_input == 'c2':
+                    print(f"Keeping measure {measure_number} from score2.")
+                    update_measure(new_score, part_name, measure_number, measure_diff['score2_measure'])
+                    break
+                elif user_input == 'q':
+                    print("Quitting merge early.")
+                    return new_score
+                else:
+                    print("Invalid option. Try again.")
+
+    print("\nMerge complete!")
+    return new_score
+
+def merge_export(merged_score, output_file):
     """
-        Show a measure with differing notes/chords highlighted in red.
+    Save the merged score to a file.
     """
-    score = stream.Score()
-    score.append(merged_measure)
-    score.show()
+    merged_score.write('musicxml', fp=output_file)
+    print(f"Merged score saved as {output_file}")

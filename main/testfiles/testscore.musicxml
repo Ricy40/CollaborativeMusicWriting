@@ -94,7 +94,7 @@
       </midi-instrument>
     </score-part>
   </part-list>
-  <part id="P1">
+  <pa">
     <measure number="1" width="532.56">
       <print>
         <system-layout>

@@ -1,4 +1,4 @@
-from diff import compare_scores, merge_scores, compare_measures, show_differences
+from diff import compare_scores, merge_scores, compare_measures, show_differences, update_measure
 from music21 import converter
 from music21 import environment
 import copy
@@ -8,69 +8,91 @@ import copy
 # Account for scores with different parts
 # Create a new score that is populated with merged parts and measures
 #
-#j
+#
 
 env = environment.Environment()
 env['musicxmlPath'] = r'C:\Program Files\MuseScore 4\bin\MuseScore4.exe'  # Update path
 env['musescoreDirectPNGPath'] = r'C:\Program Files\MuseScore 4\bin\MuseScore4.exe'
 
-def version_control(score1, score2, output_file):
+def interactive_merge(score1, score2):
+    """
+    Interactively merge two scores, letting the user choose which measures to keep.
+    Returns:
+        The merged score (initially a copy of score1, updated with user choices).
+    """
 
+    # Step 1: Detect differences
     differences = compare_scores(score1, score2)
+    if not differences:
+        print("No differences found. Scores are identical.")
+        return copy.deepcopy(score1)
 
-    if differences:
-        print(f"{len(differences)} Differences found:")
-        new_score = copy.deepcopy(score1)
-        new_score.parts
-        for measure in score1.parts[0].getElementsByClass('Measure'):
-            for difference in differences:
-                if measure.measureNumber == difference['measure_number']:
-                    managing_difference = True
-                    print(f"""Difference:\nPart: {difference['part']}\nMeasure: {difference['measure_number']}""")
+    # Step 2: Initialize new_score as a copy of score1
+    new_score = copy.deepcopy(score1)
+    print("New score created as a copy of score1.")
 
-                    while managing_difference:
-                        sel = input("""type:
-                        's1' to show the first score's measure
-                        's2' to show the second score's measure
-                        'n' to highlight the difference in notes from the first score to the second score
-                        "c1" to choose to keep the first score's measure
-                        "c2" to choose to keep the second score's measure
-                        'q' to quit""")
+    # Step 3: Iterate through parts with differences
+    for part_diff in differences:
+        part_name = part_diff['part_name']
+        print(f"\nChecking part: {part_name}")
 
-                        sel = sel.lower()
+        # Step 4: Iterate through differing measures in this part
+        for measure_diff in part_diff['differences']:
+            measure_number = measure_diff['measure_number']
+            print(f"\nMeasure {measure_number}: Differences detected.")
 
-                        if sel == "s2":
-                            difference['score1_measure'].show()
-                        elif sel == "s2":
-                            difference['score2_measure'].show()
-                        elif sel == "n":
-                            merged_measure = compare_measures(difference['score1_measure'], difference['score2_measure'])
-                            show_differences(merged_measure)
-                        elif sel == "c1":
-                            score1.remove(difference['score1_measure'])
-                            score1.insert(difference['measure_number'], difference['score2_measure'])
-                            managing_difference = False
+            while True:
+                # Prompt user for action
+                user_input = input(
+                    "Options:\n"
+                    "  s1 - Show measure from score1\n"
+                    "  s2 - Show measure from score2\n"
+                    "  n  - Show differences (highlighted in red)\n"
+                    "  c1 - Keep measure from score1\n"
+                    "  c2 - Keep measure from score2\n"
+                    "  q  - Quit merging\n"
+                    "Choose an option: "
+                ).strip().lower()
+
+                # Handle user input
+                if user_input == 's1':
+                    measure_diff['score1_measure'].show('musicxml')
+                elif user_input == 's2':
+                    measure_diff['score2_measure'].show('musicxml')
+                elif user_input == 'n':
+                    show_differences(measure_diff['score1_measure'], measure_diff['score2_measure'])
+                elif user_input == 'c1':
+                    print(f"Keeping measure {measure_number} from score1.")
+                    break
+                elif user_input == 'c2':
+                    print(f"Keeping measure {measure_number} from score2.")
+                    update_measure(new_score, part_name, measure_number, measure_diff['score2_measure'])
+                    break
+                elif user_input == 'q':
+                    print("Quitting merge early.")
+                    return new_score
+                else:
+                    print("Invalid option. Try again.")
+
+    print("\nMerge complete!")
+    return new_score
 
 
-                        merged_measure = compare_measures(difference['score1_measure'], difference['score2_measure'])
-                        show_differences(merged_measure)
-                        input("Press Enter to continue...")
-
-
-
-
-        # merged_score = merge_scores(score1, score2)
-        # merged_score.write('musicxml', output_file)
-        # print(f"Merged score saved to {output_file}")
-    else:
-        print("No differences found.")
+def version_control(score1, score2, output_file):
+    """
+    Save the merged score to a file.
+    """
+    merged_score = interactive_merge(score1, score2)
+    merged_score.write('musicxml', fp=output_file)
+    print(f"Merged score saved as {output_file}")
 
 
 
 file1 = "../testfiles/testscore.musicxml"
 file2 = "../testfiles/testscore2.musicxml"
+output_file = "output.musicxml"
 
 score1 = converter.parse(file1)
 score2 = converter.parse(file2)
 
-version_control(score1, score2, "output.musicxml")
+version_control(score1, score2, output_file)
