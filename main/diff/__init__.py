@@ -87,12 +87,18 @@ def version_control(score1, score2, output_file):
     print(f"Merged score saved as {output_file}")
 
 
+file3 = "../testfiles/testscore.musicxml"
+file4 = "../testfiles/testscore2.musicxml"
+file1 = "C:/Users/ricar/Documents/University/CM3203/main/testfiles/testscore.musicxml"
+file2 = "C:/Users/ricar/Documents/University/CM3203/main/testfiles/testscore2.musicxml"
+#output_file = "output.musicxml"
 
-file1 = "../testfiles/testscore.musicxml"
-file2 = "../testfiles/testscore2.musicxml"
-output_file = "output.musicxml"
-
+score3 = converter.parse(file3)
+score4 = converter.parse(file4)
+print("okay")
 score1 = converter.parse(file1)
 score2 = converter.parse(file2)
 
-version_control(score1, score2, output_file)
+#version_control(score1, score2, output_file)
+
+

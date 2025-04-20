@@ -1,8 +1,11 @@
 import tkinter as tk
+import copy
 
 from . import utils
 from .screens import FileSelectScreen, MergeScreen, CompletionScreen, FailureScreen
 from music21 import converter, environment
+
+from ..core import compare_scores
 
 
 class MusicMergeApp:
@@ -12,7 +15,8 @@ class MusicMergeApp:
         self.root.geometry("600x400")
 
         # Application state
-        self.scores = {}
+        self.score1 = None
+        self.score2 = None
         self.differences = []
         self.current_diff_index = 0
         self.merged_score = None
@@ -45,16 +49,19 @@ class MusicMergeApp:
         env['musicxmlPath'] = path
 
     def load_scores(self, file1, file2):
-        self.scores['score1'] = converter.parse(file1)
-        self.scores['score2'] = converter.parse(file2)
+        self.score1 = converter.parse(file1)
+        self.score2 = converter.parse(file2)
         self.differences = self.compare_scores()
         self.current_diff_index = 0
-        self.merged_score = self.scores['score1'].clone()
+        self.merged_score = copy.deepcopy(self.score1)
 
     def get_current_diff(self):
         if self.current_diff_index < len(self.differences):
             return self.differences[self.current_diff_index]
         return None
+
+    def compare_scores(self):
+        return compare_scores(self.score1, self.score2)
 
     def show_measure(self, source):
         current = self.get_current_diff()

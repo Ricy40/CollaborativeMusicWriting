@@ -4,26 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cee6410f-4417-45d4-b823-13633022d103" name="Changes" comment="progress">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/core.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/gui.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/gui/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/gui/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/gui/screens.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicmerge/gui/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CollaborativeMusicWriting.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CollaborativeMusicWriting.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cee6410f-4417-45d4-b823-13633022d103" name="Changes" comment="GUI Updates and Core Finilisations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/__main__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main/diff/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/diff/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/diff/diff.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/diff/diff.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/file.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/main.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main/testfiles/testscore.musicxml" beforeDir="false" afterPath="$PROJECT_DIR$/main/testfiles/testscore.musicxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/testfiles/testscore2.mscz.autosave" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicmerge/gui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicmerge/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge/gui/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +33,12 @@
     &quot;assignee&quot;: &quot;Ricy40&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Ricy40/CollaborativeMusicWriting.git&quot;,
-    &quot;accountId&quot;: &quot;d998857d-08dd-4da4-ba9d-bfef2c80a689&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Ricy40/CollaborativeMusicWriting.git",
+    "accountId": "9a314e85-8440-4486-906f-4371a5347c9b"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -115,7 +102,7 @@
       <workItem from="1741957695070" duration="1188000" />
       <workItem from="1743415066291" duration="8625000" />
       <workItem from="1744990720497" duration="914000" />
-      <workItem from="1745059882709" duration="10090000" />
+      <workItem from="1745059882709" duration="12970000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -133,7 +120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743424121885</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="GUI Updates and Core Finilisations">
+      <option name="closed" value="true" />
+      <created>1745105999062</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745105999062</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,12 +148,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="progress" />
+    <MESSAGE value="GUI Updates and Core Finilisations" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI Updates and Core Finilisations" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CollaborativeMusicWriting$file.coverage" NAME="file Coverage Results" MODIFIED="1739203014398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/CollaborativeMusicWriting$diff.coverage" NAME="diff Coverage Results" MODIFIED="1743421249784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main/diff" />
-    <SUITE FILE_PATH="coverage/CM3203$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1745066141733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main/diff" />
+    <SUITE FILE_PATH="coverage/CM3203$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1745153161677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main/diff" />
     <SUITE FILE_PATH="coverage/CM3203$setup.coverage" NAME="setup Coverage Results" MODIFIED="1745067191924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CollaborativeMusicWriting$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1743421834460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main/diff" />
     <SUITE FILE_PATH="coverage/CM3203$diff.coverage" NAME="diff Coverage Results" MODIFIED="1745065699722" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main/diff" />

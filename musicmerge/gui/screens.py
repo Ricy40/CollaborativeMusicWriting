@@ -108,7 +108,7 @@ class FileSelectScreen(BaseScreen):
             )
             self.controller.show_screen("MergeScreen")
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to load files:\n{str(e)}")
+            messagebox.showerror("Error", f"Failed to load files:\n{str(e)}\nScore is likely empty, invalid or corrupted.")
 
 
 class MergeScreen(BaseScreen):
