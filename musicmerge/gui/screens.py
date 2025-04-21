@@ -147,7 +147,7 @@ class MergeScreen(BaseScreen):
         self.status_label = ttk.Label(self, text="")
         self.status_label.pack(pady=10)
 
-        # Warning about MuseScore
+        # Warning about MuseScore word
         ttk.Label(self,
                   text="Note: Buttons marked with (s1/s2/n) require MuseScore installed",
                   foreground="red").pack(side=tk.BOTTOM, pady=10)
