@@ -5,7 +5,8 @@ from . import utils
 from .screens import FileSelectScreen, MergeScreen, CompletionScreen, FailureScreen
 from music21 import converter, environment
 
-from ..core import compare_scores
+from .utils import get_compared_measure
+from ..core import compare_scores, show_differences
 
 
 class MusicMergeApp:
@@ -17,10 +18,15 @@ class MusicMergeApp:
         # Application state
         self.score1 = None
         self.score2 = None
+
         self.differences = []
-        self.current_diff_index = 0
+        self.current_part_index = 0
+        self.current_measure_set = []
+        self.current_measure_index = 0
+
         self.merged_score = None
         self.error_message = tk.StringVar()
+
 
         # Configure screens
         self.screens = {}
@@ -52,12 +58,17 @@ class MusicMergeApp:
         self.score1 = converter.parse(file1)
         self.score2 = converter.parse(file2)
         self.differences = self.compare_scores()
-        self.current_diff_index = 0
+
+        self.current_part_index = 0
+        self.current_measure_set = (self.differences[self.current_part_index]['differences'] if self.differences else "")
+        self.current_measure_index = 0
+
         self.merged_score = copy.deepcopy(self.score1)
 
     def get_current_diff(self):
-        if self.current_diff_index < len(self.differences):
-            return self.differences[self.current_diff_index]
+        if self.current_part_index < len(self.differences):
+            if self.current_measure_index < len(self.current_measure_set):
+                return self.current_measure_set[self.current_measure_index]
         return None
 
     def compare_scores(self):
@@ -72,8 +83,8 @@ class MusicMergeApp:
     def show_differences(self):
         current = self.get_current_diff()
         if current:
-            # Implement your show_differences logic here
-            pass
+            compared_measure = get_compared_measure(current['score1_measure'], current['score2_measure'])
+            compared_measure.show('musicxml')
 
     def keep_measure(self, source):
         current = self.get_current_diff()

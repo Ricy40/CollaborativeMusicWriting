@@ -1,6 +1,7 @@
 import tkinter as tk
 from pathlib import Path
 from tkinter import ttk, filedialog, messagebox
+import threading
 
 from musicmerge.gui import utils
 
@@ -106,7 +107,10 @@ class FileSelectScreen(BaseScreen):
                 self.file1_var.get(),
                 self.file2_var.get()
             )
-            self.controller.show_screen("MergeScreen")
+            if len(self.controller.differences) > 0:
+                self.controller.show_screen("MergeScreen")
+            else:
+                self.controller.show_screen("CompletionScreen")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load files:\n{str(e)}\nScore is likely empty, invalid or corrupted.")
 
@@ -117,28 +121,24 @@ class MergeScreen(BaseScreen):
         nav_frame = ttk.Frame(self)
         nav_frame.pack(fill=tk.X, pady=10)
 
-        # Current Part/Measure Display
-        self.current_part = tk.StringVar()
-        self.current_measure = tk.StringVar()
-
-        ttk.Label(nav_frame, textvariable=self.current_part).pack(side=tk.LEFT, padx=10)
-        ttk.Label(nav_frame, textvariable=self.current_measure).pack(side=tk.LEFT)
+        #ttk.Label(nav_frame, textvariable=self.current_part).pack(side=tk.LEFT, padx=10)
+        #ttk.Label(nav_frame, textvariable=self.current_measure).pack(side=tk.LEFT)
 
         # Button Frame
         btn_frame = ttk.Frame(self)
         btn_frame.pack(pady=20)
 
         # Action Buttons
-        ttk.Button(btn_frame, text="Show Score 1 (s1)",
-                   command=lambda: self.show_measure('score1')).grid(row=0, column=0, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Show Score 2 (s2)",
-                   command=lambda: self.show_measure('score2')).grid(row=0, column=1, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Show Differences (n)",
-                   command=self.show_differences).grid(row=0, column=2, padx=5, pady=5)
+        ttk.Button(btn_frame, text="Show Measure from Score 1",
+                   command=lambda: self.show_measure_threaded('score1')).grid(row=0, column=0, padx=5, pady=5)
+        ttk.Button(btn_frame, text="Show Measure from Score 2",
+                   command=lambda: self.show_measure_threaded('score2')).grid(row=0, column=1, padx=5, pady=5)
+        ttk.Button(btn_frame, text="Show Differences",
+                   command=self.show_differences_threaded).grid(row=0, column=2, padx=5, pady=5)
 
-        ttk.Button(btn_frame, text="Keep Score 1 (c1)",
+        ttk.Button(btn_frame, text="Keep Measure from Score 1",
                    command=lambda: self.keep_measure('score1')).grid(row=1, column=0, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Keep Score 2 (c2)",
+        ttk.Button(btn_frame, text="Keep Measure from Score 2",
                    command=lambda: self.keep_measure('score2')).grid(row=1, column=1, padx=5, pady=5)
         ttk.Button(btn_frame, text="Quit (q)",
                    command=self.quit).grid(row=1, column=2, padx=5, pady=5)
@@ -159,12 +159,26 @@ class MergeScreen(BaseScreen):
         except Exception as e:
             self.status_label.config(text=f"Error: {str(e)}", foreground="red")
 
+    def show_measure_threaded(self, source):
+        """Run show_measure in a separate thread"""
+        def worker():
+            self.show_measure(source)
+
+        threading.Thread(target=worker, daemon=True).start()
+
     def show_differences(self):
         try:
             self.controller.show_differences()
             self.status_label.config(text="Showing differences", foreground="blue")
         except Exception as e:
             self.status_label.config(text=f"Error: {str(e)}", foreground="red")
+
+    def show_differences_threaded(self):
+        """Run show_compared_measure in a separate thread"""
+        def worker():
+            self.show_differences()
+
+        threading.Thread(target=worker, daemon=True).start()
 
     def keep_measure(self, source):
         self.controller.keep_measure(source)
