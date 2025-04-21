@@ -105,3 +105,25 @@ def get_compared_measure(measure1, measure2):
 
     # Display in MuseScore
     return highlighted_measure
+
+
+def update_measure_in_score(target_score, part_id, measure_number, new_measure):
+    """
+    Replace a specific measure in the target score
+    Args:
+        target_score: The score being modified (music21.stream.Score)
+        part_id: ID of the part to update (str)
+        measure_number: Measure number to replace (int)
+        new_measure: The measure to insert (music21.stream.Measure)
+    """
+    for part in target_score.parts:
+        if part.id == part_id:
+            for measure in part.getElementsByClass('Measure'):
+                if measure.number == measure_number:
+                    # Clone the measure to avoid reference issues
+                    new_measure_copy = copy.deepcopy(new_measure)
+                    new_measure_copy.number = measure_number  # Preserve measure number
+
+                    part.replace(measure, new_measure_copy, recurse=True)
+                    return True
+    return False

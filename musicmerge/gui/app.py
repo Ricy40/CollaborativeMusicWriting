@@ -1,11 +1,12 @@
 import tkinter as tk
 import copy
+from tkinter import ttk
 
 from . import utils
 from .screens import FileSelectScreen, MergeScreen, CompletionScreen, FailureScreen
 from music21 import converter, environment
 
-from .utils import get_compared_measure
+from .utils import get_compared_measure, update_measure_in_score
 from ..core import compare_scores, show_differences
 
 
@@ -23,10 +24,12 @@ class MusicMergeApp:
         self.current_part_index = 0
         self.current_measure_set = []
         self.current_measure_index = 0
+        self.current_overall_index = 1
 
         self.merged_score = None
         self.error_message = tk.StringVar()
 
+        self.style = ttk.Style()
 
         # Configure screens
         self.screens = {}
@@ -49,6 +52,25 @@ class MusicMergeApp:
         for screen in self.screens.values():
             screen.hide()
         self.screens[screen_name].show()
+
+    def get_current_part(self):
+        if self.current_part_index < len(self.differences):
+            return f"{self.differences[self.current_part_index]['part_id'] if self.differences else None}, {self.differences[self.current_part_index]['part_name'] if self.differences else None}"
+        return "No part selected"
+
+    def get_current_measure(self):
+        if self.current_measure_set:
+            return f"Measure {self.current_measure_set[self.current_measure_index]['measure_number']}"
+        return "No measure selected"
+
+    def get_total_differences(self):
+        total = 0
+        for part in self.differences:
+            total += len(part['differences'])
+        return total
+
+    def get_current_diff_overall_number(self):
+        return self.current_overall_index
 
     def set_musescore_path(self, path):
         env = environment.Environment()
@@ -86,11 +108,24 @@ class MusicMergeApp:
             compared_measure = get_compared_measure(current['score1_measure'], current['score2_measure'])
             compared_measure.show('musicxml')
 
-    def keep_measure(self, source):
+    def move_to_next_measure(self):
+        if self.current_measure_index + 1 < len(self.current_measure_set):
+            self.current_measure_index += 1
+            self.current_overall_index += 1
+        elif self.current_part_index + 1 < len(self.differences):
+            self.current_part_index += 1
+            self.current_measure_set = (self.differences[self.current_part_index]['differences'] if self.differences else "")
+            self.current_measure_index = 0
+            self.current_overall_index += 1
+        else:
+            self.show_screen("CompletionScreen")
+
+    def keep_measure(self):
         current = self.get_current_diff()
-        if current:
-            # Implement your measure keeping logic here
-            self.current_diff_index += 1
+        new_measure = current['score2_measure']
+        part_id = self.differences[self.current_part_index]['part_id']
+        measure_id = current['measure_number']
+        update_measure_in_score(self.merged_score, part_id, measure_id, new_measure)
 
     def quit_merge(self):
         self.show_screen("CompletionScreen")

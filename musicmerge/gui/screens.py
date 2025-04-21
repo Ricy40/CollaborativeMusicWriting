@@ -115,14 +115,28 @@ class FileSelectScreen(BaseScreen):
             messagebox.showerror("Error", f"Failed to load files:\n{str(e)}\nScore is likely empty, invalid or corrupted.")
 
 
-class MergeScreen(BaseScreen):
+class MergeScreen(BaseScreen):        
+
     def create_widgets(self):
         # Navigation Frame
         nav_frame = ttk.Frame(self)
         nav_frame.pack(fill=tk.X, pady=10)
 
-        #ttk.Label(nav_frame, textvariable=self.current_part).pack(side=tk.LEFT, padx=10)
-        #ttk.Label(nav_frame, textvariable=self.current_measure).pack(side=tk.LEFT)
+        # Title Frame
+        title_frame = ttk.Frame(self, style='Title.TFrame')
+        title_frame.pack(fill=tk.X, pady=(10, 20))
+
+        self.title_var = tk.StringVar(value="INITIAL TEXT THAT SHOULD APPEAR")
+        self.title_label = ttk.Label(
+            textvariable=self.title_var,
+            font=('Helvetica', 10, 'bold')
+        )
+        self.title_label.pack()
+
+        self.controller.style.configure('Title.TFrame', background='red')  # Temporary
+
+        #ttk.Label(nav_frame, textvariable=self.controller.get_current_part()).pack(side=tk.LEFT, padx=10)
+        #ttk.Label(nav_frame, textvariable=self.controller.get_current_measure()).pack(side=tk.LEFT)
 
         # Button Frame
         btn_frame = ttk.Frame(self)
@@ -137,9 +151,9 @@ class MergeScreen(BaseScreen):
                    command=self.show_differences_threaded).grid(row=0, column=2, padx=5, pady=5)
 
         ttk.Button(btn_frame, text="Keep Measure from Score 1",
-                   command=lambda: self.keep_measure('score1')).grid(row=1, column=0, padx=5, pady=5)
+                   command=lambda: self.keep_measure_score1()).grid(row=1, column=0, padx=5, pady=5)
         ttk.Button(btn_frame, text="Keep Measure from Score 2",
-                   command=lambda: self.keep_measure('score2')).grid(row=1, column=1, padx=5, pady=5)
+                   command=lambda: self.keep_measure_score2()).grid(row=1, column=1, padx=5, pady=5)
         ttk.Button(btn_frame, text="Quit (q)",
                    command=self.quit).grid(row=1, column=2, padx=5, pady=5)
 
@@ -147,15 +161,32 @@ class MergeScreen(BaseScreen):
         self.status_label = ttk.Label(self, text="")
         self.status_label.pack(pady=10)
 
-        # Warning about MuseScore word
+        # Warning about MuseScore
         ttk.Label(self,
-                  text="Note: Buttons marked with (s1/s2/n) require MuseScore installed",
+                  text="Note: Showing Measures and Differences requires MuseScore installed",
                   foreground="red").pack(side=tk.BOTTOM, pady=10)
+
+        self.update_title()
+
+    def update_title(self):
+        try:
+            """Update the title with current difference information"""
+            current = self.controller.get_current_diff_overall_number()
+            total = self.controller.get_total_differences()
+            diff = self.controller.differences[self.controller.current_part_index]
+
+            self.title_var.set(
+                f"Looking at difference {current} of {total} "
+                f"in part {diff['part_name']}, measure {diff['differences'][self.controller.current_measure_index]}"
+            )
+            self.title_label.config(textvariable=self.title_var)
+        except Exception as e:
+            self.title_label.config(text=f"Error: {str(e)}")
 
     def show_measure(self, source):
         try:
-            self.controller.show_measure(source)
             self.status_label.config(text=f"Showing {source}", foreground="blue")
+            self.controller.show_measure(source)
         except Exception as e:
             self.status_label.config(text=f"Error: {str(e)}", foreground="red")
 
@@ -174,27 +205,26 @@ class MergeScreen(BaseScreen):
             self.status_label.config(text=f"Error: {str(e)}", foreground="red")
 
     def show_differences_threaded(self):
-        """Run show_compared_measure in a separate thread"""
+        """Run show_differences in a separate thread"""
         def worker():
             self.show_differences()
 
         threading.Thread(target=worker, daemon=True).start()
 
-    def keep_measure(self, source):
-        self.controller.keep_measure(source)
+    def keep_measure_score1(self):
+        self.controller.move_to_next_measure()
+        self.update_display()
+
+    def keep_measure_score2(self):
+        self.controller.keep_measure()
+        self.controller.move_to_next_measure()
         self.update_display()
 
     def quit(self):
         self.controller.quit_merge()
 
     def update_display(self):
-        current = self.controller.get_current_diff()
-        if current:
-            self.current_part.set(f"Part: {current['part_name']}")
-            self.current_measure.set(f"Measure: {current['measure_number']}")
-        else:
-            self.controller.show_screen("CompletionScreen")
-
+        self.update_title()
 
 class CompletionScreen(BaseScreen):
     def create_widgets(self):
