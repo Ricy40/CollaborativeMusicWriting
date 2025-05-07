@@ -8,7 +8,7 @@
     <creator type="composer">Composer / arranger</creator>
     <encoding>
       <software>MuseScore 4.5.1</software>
-      <encoding-date>2025-04-21</encoding-date>
+      <encoding-date>2025-04-30</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="yes" value="yes"/>
@@ -67,15 +67,15 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="600.241935" default-y="1611.210312" justify="center" valign="top" font-size="22">5 Bars of C</credit-words>
+    <credit-words default-x="600.24" default-y="1611.425112" justify="center" valign="top" font-size="22">5 Bars of C</credit-words>
     </credit>
   <credit page="1">
     <credit-type>subtitle</credit-type>
-    <credit-words default-x="600.241935" default-y="1554.060198" justify="center" valign="top" font-size="14">test score</credit-words>
+    <credit-words default-x="600.24" default-y="1554.274998" justify="center" valign="top" font-size="14">test score</credit-words>
     </credit>
   <credit page="1">
     <credit-type>composer</credit-type>
-    <credit-words default-x="1114.7587" default-y="1511.210312" justify="right" valign="bottom">Ricardo</credit-words>
+    <credit-words default-x="1114.7548" default-y="1511.214784" justify="right" valign="bottom">Ricardo</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">
@@ -127,7 +127,7 @@
           <line>4</line>
           </clef>
         </attributes>
-      <note default-x="82.98" default-y="-50">
+      <note default-x="82.97" default-y="-50">
         <pitch>
           <step>C</step>
           <octave>4</octave>

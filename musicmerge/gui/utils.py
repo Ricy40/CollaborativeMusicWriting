@@ -74,39 +74,6 @@ def show_in_musescore(score_obj, musescore_path=None):
     # Schedule file deletion after 30 seconds
     threading.Timer(30, lambda: Path(tmp_path).unlink(missing_ok=True)).start()
 
-def get_compared_measure(measure1, measure2):
-    """
-    Show a measure with differing notes/chords highlighted in red.
-    Works for both Notes and Chords.
-    """
-    # Create a new measure to hold the highlighted version
-    highlighted_measure = stream.Measure(number=measure1.number)
-
-    # Copy all elements (clefs, time signatures, etc.) from measure1
-    for elem in measure1.elements:
-        if not isinstance(elem, (note.Note, chord.Chord, note.Rest)):
-            highlighted_measure.insert(elem.offset, copy.deepcopy(elem))
-
-    # Compare notes/chords
-    for n1, n2 in zip(measure1.notesAndRests, measure2.notesAndRests):
-        # Case 1: Both are Notes/Chords and differ
-        if ((isinstance(n1, (note.Note, chord.Chord)) and
-             isinstance(n2, (note.Note, chord.Chord))) and
-                (n1.pitches != n2.pitches or n1.duration != n2.duration)):
-
-            # Create a colored version
-            colored_note = copy.deepcopy(n1)
-            colored_note.style.color = 'red'
-            highlighted_measure.insert(n1.offset, colored_note)
-
-        # Case 2: Rest or no difference -> copy as-is
-        else:
-            highlighted_measure.insert(n1.offset, copy.deepcopy(n1))
-
-    # Display in MuseScore
-    return highlighted_measure
-
-
 def update_measure_in_score(target_score, part_id, measure_number, new_measure):
     """
     Replace a specific measure in the target score

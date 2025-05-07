@@ -123,17 +123,16 @@ class MergeScreen(BaseScreen):
         nav_frame.pack(fill=tk.X, pady=10)
 
         # Title Frame
-        title_frame = ttk.Frame(self, style='Title.TFrame')
-        title_frame.pack(fill=tk.X, pady=(10, 20))
+        title_frame = ttk.Frame(self)
+        title_frame.pack(pady=10)
 
-        self.title_var = tk.StringVar(value="INITIAL TEXT THAT SHOULD APPEAR")
-        self.title_label = ttk.Label(
+        self.title_var = tk.StringVar(value="Looking at difference 1")
+        self.title_label = ttk.Label(title_frame,
             textvariable=self.title_var,
             font=('Helvetica', 10, 'bold')
         )
         self.title_label.pack()
-
-        self.controller.style.configure('Title.TFrame', background='red')  # Temporary
+        self.update_title()
 
         #ttk.Label(nav_frame, textvariable=self.controller.get_current_part()).pack(side=tk.LEFT, padx=10)
         #ttk.Label(nav_frame, textvariable=self.controller.get_current_measure()).pack(side=tk.LEFT)
@@ -147,15 +146,18 @@ class MergeScreen(BaseScreen):
                    command=lambda: self.show_measure_threaded('score1')).grid(row=0, column=0, padx=5, pady=5)
         ttk.Button(btn_frame, text="Show Measure from Score 2",
                    command=lambda: self.show_measure_threaded('score2')).grid(row=0, column=1, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Show Differences",
-                   command=self.show_differences_threaded).grid(row=0, column=2, padx=5, pady=5)
+
+        ttk.Button(btn_frame, text="Show Bar Differences",
+                   command=self.show_differences_threaded).grid(row=1, column=0, padx=5, pady=5)
+        ttk.Button(btn_frame, text="Show All Differences (Complete Score)",
+                   command=lambda: self.show_score_threaded('score1')).grid(row=1, column=1, padx=5, pady=5)
 
         ttk.Button(btn_frame, text="Keep Measure from Score 1",
-                   command=lambda: self.keep_measure_score1()).grid(row=1, column=0, padx=5, pady=5)
+                   command=lambda: self.keep_measure_score1()).grid(row=2, column=0, padx=5, pady=5)
         ttk.Button(btn_frame, text="Keep Measure from Score 2",
-                   command=lambda: self.keep_measure_score2()).grid(row=1, column=1, padx=5, pady=5)
+                   command=lambda: self.keep_measure_score2()).grid(row=2, column=1, padx=5, pady=5)
         ttk.Button(btn_frame, text="Quit (q)",
-                   command=self.quit).grid(row=1, column=2, padx=5, pady=5)
+                   command=self.quit).grid(row=3, column=0, padx=5, pady=5)
 
         # Status Label
         self.status_label = ttk.Label(self, text="")
@@ -166,8 +168,6 @@ class MergeScreen(BaseScreen):
                   text="Note: Showing Measures and Differences requires MuseScore installed",
                   foreground="red").pack(side=tk.BOTTOM, pady=10)
 
-        self.update_title()
-
     def update_title(self):
         try:
             """Update the title with current difference information"""
@@ -176,8 +176,7 @@ class MergeScreen(BaseScreen):
             diff = self.controller.differences[self.controller.current_part_index]
 
             self.title_var.set(
-                f"Looking at difference {current} of {total} "
-                f"in part {diff['part_name']}, measure {diff['differences'][self.controller.current_measure_index]}"
+                f"Looking at difference {current} of {total} in part {diff['part_name']}, measure {diff['differences'][self.controller.current_measure_index]['measure_number']}"
             )
             self.title_label.config(textvariable=self.title_var)
         except Exception as e:
@@ -194,6 +193,19 @@ class MergeScreen(BaseScreen):
         """Run show_measure in a separate thread"""
         def worker():
             self.show_measure(source)
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def show_score(self, source):
+        try:
+            self.status_label.config(text=f"Showing score", foreground="blue")
+            self.controller.show_score(source)
+        except Exception as e:
+            self.status_label.config(text=f"Error: {str(e)}", foreground="red")
+
+    def show_score_threaded(self, source):
+        def worker():
+            self.show_score(source)
 
         threading.Thread(target=worker, daemon=True).start()
 

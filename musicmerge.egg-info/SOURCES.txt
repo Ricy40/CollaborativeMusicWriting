@@ -3,8 +3,6 @@ setup.py
 musicmerge/__init__.py
 musicmerge/cli.py
 musicmerge/core.py
-musicmerge/gui.py
-musicmerge/utils.py
 musicmerge.egg-info/PKG-INFO
 musicmerge.egg-info/SOURCES.txt
 musicmerge.egg-info/dependency_links.txt
@@ -14,3 +12,4 @@ musicmerge.egg-info/top_level.txt
 musicmerge/gui/__init__.py
 musicmerge/gui/app.py
 musicmerge/gui/screens.py
+musicmerge/gui/utils.py

@@ -6,8 +6,8 @@ from . import utils
 from .screens import FileSelectScreen, MergeScreen, CompletionScreen, FailureScreen
 from music21 import converter, environment
 
-from .utils import get_compared_measure, update_measure_in_score
-from ..core import compare_scores, show_differences
+from .utils import update_measure_in_score
+from ..core import compare_scores, show_differences, show_highlighted_score
 
 
 class MusicMergeApp:
@@ -102,10 +102,16 @@ class MusicMergeApp:
             measure = current[f'{source}_measure']
             measure.show('musicxml')
 
+    def show_score(self, source):
+        score = self.score1
+        if score:
+            to_show = show_highlighted_score(score, self.differences)
+            to_show.show('musicxml')
+
     def show_differences(self):
         current = self.get_current_diff()
         if current:
-            compared_measure = get_compared_measure(current['score1_measure'], current['score2_measure'])
+            compared_measure = show_differences(current['score2_measure'], current['score1_measure'])
             compared_measure.show('musicxml')
 
     def move_to_next_measure(self):

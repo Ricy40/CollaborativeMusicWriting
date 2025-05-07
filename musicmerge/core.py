@@ -1,6 +1,9 @@
 from music21 import converter, stream, note, chord, expressions
 import copy
 
+from music21.musicxml.testPrimitive import articulations01
+
+
 def compare_scores(score1, score2):
     """
         Compare two scores and return differences organized by part.
@@ -49,13 +52,17 @@ def compare_scores(score1, score2):
             else:
                 for n1, n2 in zip(measure1.notes, measure2.notes):
                     if (isinstance(n1, note.Note)) and (isinstance(n2, note.Note)):
-                        if n1.pitch != n2.pitch or n1.duration != n2.duration:
+                        if calculate_difference(n1, n2) >= 0:
                             has_diff = True
                             break
                     elif (isinstance(n1, chord.Chord)) and (isinstance(n2, chord.Chord)):
                         if n1.pitches != n2.pitches or n1.duration != n2.duration:
                             has_diff = True
                             break
+                    else:
+                        # Handle cases where one is a Note and the other is a Chord
+                        has_diff = True
+                        break
 
             # Check other elements (time signatures, clefs, etc.)
             if (measure1.timeSignature != measure2.timeSignature or
@@ -88,16 +95,28 @@ def show_differences(measure1, measure2):
         if not isinstance(elem, (note.Note, chord.Chord, note.Rest)):
             highlighted_measure.insert(elem.offset, copy.deepcopy(elem))
 
+    if len(measure1.notesAndRests) != len(measure2.notesAndRests):
+        for n in measure1.notesAndRests:
+            nc = copy.deepcopy(n)
+            nc.style.color = '#ff0000'  # Highlight in red
+            highlighted_measure.insert(n.offset, nc)
+        return highlighted_measure
+
     # Compare notes/chords
     for n1, n2 in zip(measure1.notesAndRests, measure2.notesAndRests):
         # Case 1: Both are Notes/Chords and differ
         if ((isinstance(n1, (note.Note, chord.Chord)) and
-             isinstance(n2, (note.Note, chord.Chord))) and
-                (n1.pitches != n2.pitches or n1.duration != n2.duration)):
+             isinstance(n2, (note.Note, chord.Chord)))):
 
-            # Create a colored version
+            diff_met = calculate_difference(n1, n2)
+
             colored_note = copy.deepcopy(n1)
-            colored_note.style.color = 'red'
+            if diff_met >= 0.8: # Major -> Red
+                colored_note.style.color = '#ff0000'
+            elif diff_met >= 0.3: # Moderate -> Reddish Orange
+                colored_note.style.color = '#ff5500'
+            elif diff_met >= 0.1: # Minor -> Orange
+                colored_note.style.color = '#ffbb00'
             highlighted_measure.insert(n1.offset, colored_note)
 
         # Case 2: Rest or no difference -> copy as-is
@@ -105,7 +124,28 @@ def show_differences(measure1, measure2):
             highlighted_measure.insert(n1.offset, copy.deepcopy(n1))
 
     # Display in MuseScore
-    highlighted_measure.show('musicxml')
+    return highlighted_measure
+
+
+def calculate_difference(note1, note2):
+    weights = {
+        'pitch': 0.8,  # Most musically significant
+        'duration': 0.5,
+        'articulation': 0.2,
+        'stem_direction': 0.1  # Least disruptive
+    }
+
+    differences = {
+        'pitch': 0 if note1.pitch == note2.pitch else 1,
+        'duration': abs(note1.duration.quarterLength - note2.duration.quarterLength),
+        'articulation': 0 if note1.articulations == note2.articulations else 1,
+        'stem_direction': 0 if note1.stemDirection == note2.stemDirection else 1
+    }
+
+    # Normalize duration difference to [0,1]
+    differences['duration'] = min(differences['duration'] / 4.0, 1.0)
+    to_return = sum(weights[feat] * differences[feat] for feat in weights)
+    return to_return
 
 def update_measure(target_score, part_name, measure_number, new_measure):
     """
@@ -118,6 +158,25 @@ def update_measure(target_score, part_name, measure_number, new_measure):
                     part.replace(m, new_measure, recurse=True)
                     break
             break
+
+def show_highlighted_score(score, differences):
+    """
+    Display the score with highlighted differences.
+    """
+    highlighted_score = copy.deepcopy(score)
+    for part in highlighted_score.parts:
+        for measure in part.getElementsByClass('Measure'):
+            for diff in differences:
+                if part.id == diff['part_id']:
+                    for measure_diff in diff['differences']:
+                        if measure.number == measure_diff['measure_number']:
+                            print("\n measure number: " + str(measure_diff['measure_number']))
+                            print(measure, measure_diff['score2_measure'], measure_diff['score1_measure'])
+                            highlighted_measure = show_differences(measure_diff['score2_measure'], measure_diff['score1_measure'])
+                            print(highlighted_measure)
+                            part.replace(measure, highlighted_measure)
+
+    return highlighted_score
 
 def interactive_merge(score1, score2):
     """
@@ -165,7 +224,8 @@ def interactive_merge(score1, score2):
                 elif user_input == 's2':
                     measure_diff['score2_measure'].show('musicxml')
                 elif user_input == 'n':
-                    show_differences(measure_diff['score1_measure'], measure_diff['score2_measure'])
+                    measure = show_differences(measure_diff['score1_measure'], measure_diff['score2_measure'])
+                    measure.show()
                 elif user_input == 'c1':
                     print(f"Keeping measure {measure_number} from score1.")
                     break
