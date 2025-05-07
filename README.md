@@ -1,8 +1,9 @@
-To run basic CLI version use command:
 
-```python3 -m musicmerge.cli score1.musicxml score2.musicxml -o merged.musicxml```
+Firstly, install the required packages:
 
-GUI version is available in the `gui` branch. To run it, you need to install PyQt5 and run the `gui.py` file. You can do this by running the following command:
+```pip install -r requirements.txt```
 
-```pip install -e .```
-```musicmerge-gui```
+or alternatively install Music21 minimum version 9.3.0.
+
+Then run the command in project root:
+```python3 musicmerge-gui```
