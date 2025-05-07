@@ -89,8 +89,8 @@ def version_control(score1, score2, output_file):
 
 file3 = "../testfiles/testscore.musicxml"
 file4 = "../testfiles/testscore2.musicxml"
-file1 = "C:/Users/ricar/Documents/University/CM3203/main/testfiles/testscore.musicxml"
-file2 = "C:/Users/ricar/Documents/University/CM3203/main/testfiles/testscore2.musicxml"
+file1 = "C:/Users/ricar/Documents/University/CM3203/unused/testfiles/testscore.musicxml"
+file2 = "C:/Users/ricar/Documents/University/CM3203/unused/testfiles/testscore2.musicxml"
 #output_file = "output.musicxml"
 
 score3 = converter.parse(file3)

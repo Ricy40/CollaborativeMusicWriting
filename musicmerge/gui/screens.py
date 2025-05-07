@@ -109,6 +109,7 @@ class FileSelectScreen(BaseScreen):
             )
             if len(self.controller.differences) > 0:
                 self.controller.show_screen("MergeScreen")
+                self.controller.screens["MergeScreen"].update_display()
             else:
                 self.controller.show_screen("CompletionScreen")
         except Exception as e:

@@ -170,10 +170,10 @@ def show_highlighted_score(score, differences):
                 if part.id == diff['part_id']:
                     for measure_diff in diff['differences']:
                         if measure.number == measure_diff['measure_number']:
-                            print("\n measure number: " + str(measure_diff['measure_number']))
-                            print(measure, measure_diff['score2_measure'], measure_diff['score1_measure'])
+                            #print("\n measure number: " + str(measure_diff['measure_number']))
+                            #print(measure, measure_diff['score2_measure'], measure_diff['score1_measure'])
                             highlighted_measure = show_differences(measure_diff['score2_measure'], measure_diff['score1_measure'])
-                            print(highlighted_measure)
+                            #print(highlighted_measure)
                             part.replace(measure, highlighted_measure)
 
     return highlighted_score

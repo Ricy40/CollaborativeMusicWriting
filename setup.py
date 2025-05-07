@@ -8,7 +8,7 @@ setup(
     packages=find_packages(),
     entry_points={
         "console_scripts": [
-            "musicmerge = musicmerge.cli:main",
+            "musicmerge = musicmerge.cli:unused",
             "musicmerge-gui = musicmerge.gui.app:run_gui"
         ],
     },

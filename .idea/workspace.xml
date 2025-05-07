@@ -5,38 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cee6410f-4417-45d4-b823-13633022d103" name="Changes" comment="progress">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_04_2025_13_36_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_04_2025_13_36_[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_04_2025_13_36__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testfiles/control.musicxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testfiles/control_test.musicxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/Music21Diagram.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/OriginalClasses.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/compare_scores.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/example_output.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/fileselectscreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/mergescreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/midipitch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/musicdiff (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis-aids/savescreen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CollaborativeMusicWriting.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CollaborativeMusicWriting.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/PKG-INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/SOURCES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/SOURCES.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/dependency_links.txt" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/dependency_links.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/entry_points.txt" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/entry_points.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/requires.txt" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/requires.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/top_level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/top_level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Chord.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Chord.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Clef.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Clef.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Instrument.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Instrument.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Key.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Key.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Measure.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Measure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/MidiInstrument.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/MidiInstrument.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Note.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Note.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Part.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Part.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/Tempo.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/Tempo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Notation/TimeSignature.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/Notation/TimeSignature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/diff/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/diff/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/diff/diff.py" beforeDir="false" afterPath="$PROJECT_DIR$/unused/diff/diff.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicmerge/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge/core.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge/gui/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicmerge/gui/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge/gui/screens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge/gui/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge/gui/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testfiles/5barsofC.musicxml" beforeDir="false" afterPath="$PROJECT_DIR$/testfiles/5barsofC.musicxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testfiles/5barsofD.musicxml" beforeDir="false" afterPath="$PROJECT_DIR$/testfiles/5barsofD.musicxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testfiles/testscore2.mscz" beforeDir="false" afterPath="$PROJECT_DIR$/testfiles/testscore2.mscz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testfiles/testscore2.musicxml" beforeDir="false" afterPath="$PROJECT_DIR$/testfiles/testscore2.musicxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testfiles/5barsofC.mscz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testfiles/5barsofC.musicxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testfiles/5barsofD.mscz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testfiles/testscore.mscz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testfiles/testscore2.mscz" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +132,7 @@
       <workItem from="1746190073427" duration="568000" />
       <workItem from="1746361334064" duration="10439000" />
       <workItem from="1746545361843" duration="456000" />
-      <workItem from="1746611436748" duration="6071000" />
+      <workItem from="1746611436748" duration="20284000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -192,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745239393518</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="progress">
+      <option name="closed" value="true" />
+      <created>1746623427602</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746623427602</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
