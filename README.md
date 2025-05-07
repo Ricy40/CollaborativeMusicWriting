@@ -1,5 +1,7 @@
 
-Firstly, install the required packages:
+Ensure you are have installed python version 3.11 or later.
+
+Then, install the required packages in a terminal:
 
 ```pip install -r requirements.txt```
 
