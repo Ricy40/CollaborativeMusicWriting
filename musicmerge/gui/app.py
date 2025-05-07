@@ -150,3 +150,5 @@ def run_gui():
     root = tk.Tk()
     app = MusicMergeApp(root)
     root.mainloop()
+
+run_gui()

@@ -7,6 +7,12 @@
     <list default="true" id="cee6410f-4417-45d4-b823-13633022d103" name="Changes" comment="final tweaks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merged.musicxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/merged_1.musicxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/PKG-INFO" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/entry_points.txt" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/entry_points.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicmerge/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge/gui/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +118,7 @@
       <workItem from="1746190073427" duration="568000" />
       <workItem from="1746361334064" duration="10439000" />
       <workItem from="1746545361843" duration="456000" />
-      <workItem from="1746611436748" duration="20752000" />
+      <workItem from="1746611436748" duration="23053000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -186,7 +192,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746650079296</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="final tweaks">
+      <option name="closed" value="true" />
+      <created>1746650619237</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746650619237</updated>
+    </task>
+    <task id="LOCAL-00011" summary="final tweaks">
+      <option name="closed" value="true" />
+      <created>1746650708800</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1746650708800</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

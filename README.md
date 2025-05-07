@@ -1,11 +1,18 @@
 
 Ensure you are have installed python version 3.11 or later.
 
-Then, install the required packages in a terminal:
+Next install the required packages in a terminal from the root of the files:
 
 ```pip install -r requirements.txt```
 
-or alternatively install Music21 minimum version 9.3.0.
+Then install musicmerge:
 
-Then run the command in project root:
-```python3 musicmerge-gui```
+```pip install -e .```
+
+Now you may run the GUI with the command:
+
+```musicmerge-gui```
+
+alternatively, you can run the command after installing requirements.txt:
+
+```python -m musicmerge.gui.app```
