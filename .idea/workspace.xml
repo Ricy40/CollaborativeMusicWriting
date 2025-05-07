@@ -7,12 +7,6 @@
     <list default="true" id="cee6410f-4417-45d4-b823-13633022d103" name="Changes" comment="final tweaks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/merged.musicxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/merged_1.musicxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/PKG-INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge.egg-info/entry_points.txt" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge.egg-info/entry_points.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicmerge/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicmerge/gui/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +39,7 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2sfOa4N8Ifktj02RDdYnIFElZq6" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -87,8 +81,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-PY-243.23654.177" />
-        <option value="bundled-python-sdk-91d3a02ef49d-43b77aa2d136-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.23654.177" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-PY-251.23774.444" />
+        <option value="bundled-python-sdk-890ed5b35930-d9c5bdb153f4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.23774.444" />
       </set>
     </attachedChunks>
   </component>
@@ -118,7 +112,8 @@
       <workItem from="1746190073427" duration="568000" />
       <workItem from="1746361334064" duration="10439000" />
       <workItem from="1746545361843" duration="456000" />
-      <workItem from="1746611436748" duration="23053000" />
+      <workItem from="1746611436748" duration="23999000" />
+      <workItem from="1746654215380" duration="25000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -208,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746650708800</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="final tweaks">
+      <option name="closed" value="true" />
+      <created>1746653139801</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1746653139801</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
